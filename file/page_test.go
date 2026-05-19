@@ -11,7 +11,7 @@ func TestPage(t *testing.T) {
 	t.Run("NewPage", func(t *testing.T) {
 		assert := assert.New(t)
 		blockSize := 400
-		page := NewPage(blockSize)
+		page := NewPageOfSize(blockSize)
 		assert.Equal(blockSize, len(page.Contents()), "Buffer size should match block size")
 	})
 
@@ -26,7 +26,7 @@ func TestPage(t *testing.T) {
 
 	t.Run("IntOperations", func(t *testing.T) {
 		assert := assert.New(t)
-		page := NewPage(100)
+		page := NewPageOfSize(100)
 		testCases := []struct {
 			offset int
 			value  int
@@ -47,7 +47,7 @@ func TestPage(t *testing.T) {
 
 	t.Run("BytesOperations", func(t *testing.T) {
 		assert := assert.New(t)
-		page := NewPage(100)
+		page := NewPageOfSize(100)
 		testCases := []struct {
 			offset int
 			data   []byte
@@ -67,7 +67,7 @@ func TestPage(t *testing.T) {
 
 	t.Run("StringOperations", func(t *testing.T) {
 		assert := assert.New(t)
-		page := NewPage(1000)
+		page := NewPageOfSize(1000)
 		testCases := []struct {
 			offset string
 			value  string
@@ -97,7 +97,7 @@ func TestPage(t *testing.T) {
 
 	t.Run("InvalidUTF8", func(t *testing.T) {
 		assert := assert.New(t)
-		page := NewPage(100)
+		page := NewPageOfSize(100)
 		offset := 0
 
 		// Create invalid UTF-8 sequence
@@ -129,19 +129,19 @@ func TestPage(t *testing.T) {
 	t.Run("BufferBoundary", func(t *testing.T) {
 		assert := assert.New(t)
 		blockSize := 20
-		page := NewPage(blockSize)
+		page := NewPageOfSize(blockSize)
 
 		// Test writing at the end of buffer
 		lastValidOffset := blockSize - 4 // space for one int32
 		page.SetInt(lastValidOffset, 42)
 		got := page.GetInt(lastValidOffset)
-		assert.Equal(int32(42), got, "Value at buffer boundary should match")
+		assert.Equal(int(42), got, "Value at buffer boundary should match")
 	})
 
 	t.Run("LargeData", func(t *testing.T) {
 		assert := assert.New(t)
 		blockSize := 1000
-		page := NewPage(blockSize)
+		page := NewPageOfSize(blockSize)
 
 		// Create large string
 		largeString := make([]byte, 500)

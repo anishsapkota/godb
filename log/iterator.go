@@ -17,7 +17,7 @@ type Iterator struct {
 
 // NewIterator creates an iterator for the records in the log file, positioned after the last log record.
 func NewIterator(fileManager *file.Manager, block *file.BlockId) (*Iterator, error) {
-	page := file.NewPage(fileManager.BlockSize())
+	page := file.NewPageOfSize(fileManager.BlockSize())
 	iterator := &Iterator{
 		fileManager: fileManager,
 		block:       block,

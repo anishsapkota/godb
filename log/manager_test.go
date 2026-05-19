@@ -38,7 +38,7 @@ func TestLogMgr_AppendAndIteratorConsistency(t *testing.T) {
 
 	logfile := "testlog"
 
-	lm, err := NewManager(fm, logfile)
+	lm, err := NewLogManager(fm, logfile)
 	assert.NoError(err)
 
 	//Append and flush multiple records, then verify consistency

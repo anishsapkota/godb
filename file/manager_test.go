@@ -34,7 +34,7 @@ func TestFileManager(t *testing.T) {
 		assert.Equalf(block.Number(), 0, "Expected first block to be 0, got %d", block.Number())
 
 		//Create a page with test data
-		page := NewPage(blockSize)
+		page := NewPageOfSize(blockSize)
 		testData := "Hello, Database!"
 		err = page.SetString(0, testData)
 		assert.NoError(err, "Error while putting string into page: %v", err)
@@ -44,7 +44,7 @@ func TestFileManager(t *testing.T) {
 		assert.NoErrorf(err, "Failed to write block: %v", err)
 
 		//Read the page back
-		readPage := NewPage(blockSize)
+		readPage := NewPageOfSize(blockSize)
 		err = mgr.Read(block, readPage)
 		assert.NoErrorf(err, "Failed to read block: %v", err)
 
@@ -76,7 +76,7 @@ func TestFileManager(t *testing.T) {
 		}
 
 		for i, block := range blocks {
-			page := NewPage(blockSize)
+			page := NewPageOfSize(blockSize)
 			data := fmt.Sprintf("Block %d data", i)
 			err = page.SetString(0, data)
 			assert.NoError(err)
@@ -87,7 +87,7 @@ func TestFileManager(t *testing.T) {
 		}
 
 		for i, block := range blocks {
-			page := NewPage(blockSize)
+			page := NewPageOfSize(blockSize)
 			err := mgr.Read(block, page)
 			assert.NoErrorf(err, "Failed to read block %d: %v", i, err)
 
@@ -156,7 +156,7 @@ func TestFileManager(t *testing.T) {
 				assert.NoError(err)
 
 				for j := 0; j < numOperations; j++ {
-					page := NewPage(blockSize)
+					page := NewPageOfSize(blockSize)
 					data := fmt.Sprintf("Goroutine %d Operation %d", id, j)
 					err = page.SetString(0, data)
 					assert.NoError(err)
@@ -167,7 +167,7 @@ func TestFileManager(t *testing.T) {
 					assert.NoErrorf(err, "Goroutine %d write failed :%v", id, err)
 
 					// Read data
-					readPage := NewPage(blockSize)
+					readPage := NewPageOfSize(blockSize)
 					err = mgr.Read(block, readPage)
 					assert.NoError(err)
 

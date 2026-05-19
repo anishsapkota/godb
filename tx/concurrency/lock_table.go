@@ -62,7 +62,7 @@ func (lt *LockTable) SLock(block *file.BlockId) error {
 
 		if ctx.Err() != nil {
 			if errors.Is(ctx.Err(), context.DeadlineExceeded) {
-				return fmt.Errorf("lock abort execption: could not acquire shared lock on block %v: %v", block, ctx.Err())
+				return fmt.Errorf("lock abort exception: could not acquire shared lock on block %v: %v", block, ctx.Err())
 			}
 			return ctx.Err()
 		}
@@ -100,7 +100,7 @@ func (lt *LockTable) XLock(block *file.BlockId) error {
 
 		if ctx.Err() != nil {
 			if errors.Is(ctx.Err(), context.DeadlineExceeded) {
-				return fmt.Errorf("lock abort execption: could not acquire exlcusive lock on block %v:%v", block, ctx.Err())
+				return fmt.Errorf("lock abort exception: could not acquire exlcusive lock on block %v:%v", block, ctx.Err())
 			}
 			return ctx.Err()
 		}

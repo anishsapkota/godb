@@ -73,20 +73,11 @@ func (bl *BufferList) Unpin(block *file.BlockId) {
 }
 
 // UnpinAll unpins all blocks pinned by this transaction.
-// We decrement each block's refCount down to zero, unpinning once for each pin.
+// bufferManager.Pin was called exactly once per block entry (on first pin);
+// so bufferManager.Unpin must be called exactly once per entry here.
 func (bl *BufferList) UnpinAll() {
 	for _, pinnedBuf := range bl.buffers {
-		// We pinned this 'pinnedBuf.refCount' times; unpin that many times
-		for pinnedBuf.refCount > 0 {
-			pinnedBuf.refCount--
-			bl.bufferManager.Unpin(pinnedBuf.buffer)
-		}
-		// Alternatively:
-		//   for i := 0; i < pinnedBuf.refCount; i++ {
-		//       bl.bufferManager.Unpin(pinnedBuf.buffer)
-		//   }
-		// pinnedBuf.refCount = 0
+		bl.bufferManager.Unpin(pinnedBuf.buffer)
 	}
-	// Clear our map
 	bl.buffers = make(map[file.BlockId]*pinnedBuffer)
 }

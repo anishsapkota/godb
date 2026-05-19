@@ -4,7 +4,6 @@ import (
 	"encoding/binary"
 	"errors"
 	"mydb/utils"
-	"runtime"
 	"time"
 	"unicode/utf8"
 )
@@ -17,8 +16,8 @@ type Page struct {
 	buffer []byte
 }
 
-// NewPage creates a Page with a buffer of the given block size.
-func NewPage(blockSize int) *Page {
+// NewPageOfSize creates a Page with a buffer of the given block size.
+func NewPageOfSize(blockSize int) *Page {
 	return &Page{buffer: make([]byte, blockSize)}
 }
 
@@ -29,20 +28,12 @@ func NewPageFromBytes(bytes []byte) *Page {
 
 // GetInt retrieves an integer from the buffer at the specified offset.
 func (p *Page) GetInt(offset int) int {
-	if runtime.GOARCH == "386" || runtime.GOARCH == "arm" {
-		return int(binary.BigEndian.Uint32(p.buffer[offset:]))
-	}
-	// arm64 (M1/M2 Macs) and amd64 use 64-bit
-	return int(binary.BigEndian.Uint64(p.buffer[offset:]))
+	return int(int32(binary.BigEndian.Uint32(p.buffer[offset:])))
 }
 
 // SetInt writes an integer to the buffer at the specified offset.
 func (p *Page) SetInt(offset int, n int) {
-	if runtime.GOARCH == "386" || runtime.GOARCH == "arm" {
-		binary.BigEndian.PutUint32(p.buffer[offset:], uint32(n))
-	} else {
-		binary.BigEndian.PutUint64(p.buffer[offset:], uint64(n))
-	}
+	binary.BigEndian.PutUint32(p.buffer[offset:], uint32(n))
 }
 
 // GetLong retrieves a 64-bit integer from the buffer at the specified offset.

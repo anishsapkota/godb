@@ -38,7 +38,7 @@ func TestConcurrencySuccess(t *testing.T) {
 		}
 	}()
 
-	lm, err := log.NewManager(fm, "logfile")
+	lm, err := log.NewLogManager(fm, "logfile")
 	assert.NoError(t, err, "Error initializing log manager")
 	bm := buffer.NewManager(fm, lm, 8) // 8 buffers
 	lt := concurrency.NewLockTable()
@@ -261,7 +261,7 @@ func TestDeadlockDetection(t *testing.T) {
 		}
 	}()
 
-	lm, err := log.NewManager(fm, "logfile")
+	lm, err := log.NewLogManager(fm, "logfile")
 	assert.NoError(t, err, "Error initializing log manager")
 	bm := buffer.NewManager(fm, lm, 8) // 8 buffers
 	lt := concurrency.NewLockTable()

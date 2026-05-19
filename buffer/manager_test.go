@@ -29,7 +29,7 @@ func setupTest(t *testing.T, numBuffers int) *testEnv {
 	fm, err := file.NewManager(dbDir, 400)
 	require.NoError(t, err)
 
-	lm, err := log.NewManager(fm, "testlog")
+	lm, err := log.NewLogManager(fm, "testlog")
 	require.NoError(t, err)
 
 	cleanup := func() {

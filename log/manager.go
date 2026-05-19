@@ -14,7 +14,7 @@ import (
 // The log manager is responsible for managing the log records in the log file.
 // The log manager is thread-safe.
 type Manager struct {
-	fileManager  *file.Manager
+	fm           *file.Manager
 	logFile      string
 	logPage      *file.Page
 	currentBlock *file.BlockId
@@ -23,11 +23,11 @@ type Manager struct {
 	mu           sync.Mutex
 }
 
-func NewManager(fileManager *file.Manager, logFile string) (*Manager, error) {
+func NewLogManager(fm *file.Manager, logFile string) (*Manager, error) {
 	//Create a new empty page
-	logPage := file.NewPage(fileManager.BlockSize())
+	logPage := file.NewPageOfSize(fm.BlockSize())
 
-	logSize, err := fileManager.Length(logFile)
+	logSize, err := fm.Length(logFile)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get log file lenght : %v", err)
 	}
@@ -35,7 +35,7 @@ func NewManager(fileManager *file.Manager, logFile string) (*Manager, error) {
 	var currentBlock *file.BlockId
 	if logSize == 0 {
 		//if log file is empty, append a new empty block to it.
-		currentBlock, err = appendNewBlock(fileManager, logFile, logPage)
+		currentBlock, err = appendNewBlock(fm, logFile, logPage)
 		if err != nil {
 			return nil, fmt.Errorf("failed to append a new block: %v", err)
 		}
@@ -43,12 +43,12 @@ func NewManager(fileManager *file.Manager, logFile string) (*Manager, error) {
 	} else {
 		//If log file is not empty, read the last block into the page
 		currentBlock = &file.BlockId{File: logFile, BlockNumber: logSize - 1}
-		if err := fileManager.Read(currentBlock, logPage); err != nil {
+		if err := fm.Read(currentBlock, logPage); err != nil {
 			return nil, fmt.Errorf("failed to read log page: %v", err)
 		}
 	}
 	return &Manager{
-		fileManager:  fileManager,
+		fm:           fm,
 		logFile:      logFile,
 		logPage:      logPage,
 		currentBlock: currentBlock,
@@ -71,7 +71,7 @@ func (m *Manager) Iterator() (*Iterator, error) {
 	if err := m.flush(); err != nil {
 		return nil, fmt.Errorf("failed to flush log: %v", err)
 	}
-	return NewIterator(m.fileManager, m.currentBlock)
+	return NewIterator(m.fm, m.currentBlock)
 }
 
 // The beginning of the buffer contains the location of the last-written record (the "boundary").
@@ -92,7 +92,7 @@ func (m *Manager) Append(logRecord []byte) (int, error) {
 		}
 
 		var err error
-		m.currentBlock, err = appendNewBlock(m.fileManager, m.logFile, m.logPage)
+		m.currentBlock, err = appendNewBlock(m.fm, m.logFile, m.logPage)
 		if err != nil {
 			return 0, fmt.Errorf("failed to append new block: %v", err)
 		}
@@ -110,14 +110,14 @@ func (m *Manager) Append(logRecord []byte) (int, error) {
 	return m.latestLSN, nil
 }
 
-func appendNewBlock(fileManager *file.Manager, logFile string, logPage *file.Page) (*file.BlockId, error) {
-	block, err := fileManager.Append(logFile)
+func appendNewBlock(fm *file.Manager, logFile string, logPage *file.Page) (*file.BlockId, error) {
+	block, err := fm.Append(logFile)
 	if err != nil {
 		return nil, fmt.Errorf("failed to append new block: %v", err)
 	}
-	logPage.SetInt(0, fileManager.BlockSize())
+	logPage.SetInt(0, fm.BlockSize())
 
-	if err := fileManager.Write(block, logPage); err != nil {
+	if err := fm.Write(block, logPage); err != nil {
 		return nil, fmt.Errorf("failed to write new block: %v", err)
 	}
 	return block, nil
@@ -125,7 +125,7 @@ func appendNewBlock(fileManager *file.Manager, logFile string, logPage *file.Pag
 
 // flush writes the buffer to the log file. This method is not thread-safe.
 func (m *Manager) flush() error {
-	if err := m.fileManager.Write(m.currentBlock, m.logPage); err != nil {
+	if err := m.fm.Write(m.currentBlock, m.logPage); err != nil {
 		return fmt.Errorf("failed to write log page:%v", err)
 	}
 	m.lastSavedLSN = m.latestLSN

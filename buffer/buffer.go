@@ -26,7 +26,7 @@ func NewBuffer(fileManager *file.Manager, logManager *log.Manager) *Buffer {
 	return &Buffer{
 		fileManager: fileManager,
 		logManager:  logManager,
-		contents:    file.NewPage(fileManager.BlockSize()),
+		contents:    file.NewPageOfSize(fileManager.BlockSize()),
 		block:       nil,
 		pins:        0,
 		txnNum:      -1,
