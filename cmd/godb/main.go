@@ -35,7 +35,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	fmt.Println("\033[90m  Type SQL followed by ; to execute. .quit to exit.\033[0m\n")
+	fmt.Print("\033[90m  Type SQL followed by ; to execute. .quit to exit.\033[0m\n\n")
 
 	scanner := bufio.NewScanner(os.Stdin)
 	var buf strings.Builder

@@ -2,6 +2,7 @@ package metadata
 
 import (
 	"godb/index"
+	"godb/index/btree"
 	"godb/index/hash"
 	"godb/record"
 	"godb/tx"
@@ -32,8 +33,12 @@ func NewIndexInfo(indexName, fieldName string, tableSchema *record.Schema,
 
 // Open opens the index described by this object.
 func (ii *IndexInfo) Open() index.Index {
-	return hash.NewIndex(ii.transaction, ii.indexName, ii.indexLayout)
-	//return NewBtreeIndex(ii.transaction, ii.indexName, ii.indexLayout)
+	idx, err := btree.NewIndex(ii.transaction, ii.indexName, ii.indexLayout)
+	if err != nil {
+		// fall back to hash on init error (e.g. during catalog bootstrap)
+		return hash.NewIndex(ii.transaction, ii.indexName, ii.indexLayout)
+	}
+	return idx
 }
 
 // BlocksAccessed estimates the number of block accesses required to
@@ -45,8 +50,7 @@ func (ii *IndexInfo) Open() index.Index {
 func (ii *IndexInfo) BlocksAccessed() int {
 	recordsPerBlock := ii.transaction.BlockSize() / ii.indexLayout.SlotSize()
 	numBlocks := ii.statInfo.RecordsOutput() / recordsPerBlock
-	return hash.SearchCost(numBlocks, recordsPerBlock)
-	//return BtreeIndex.SearchCost(numBlocks, recordsPerBlock)
+	return btree.SearchCost(numBlocks, recordsPerBlock)
 }
 
 // RecordsOutput returns the estimated number of records having a search key.
