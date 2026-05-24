@@ -2,11 +2,11 @@ package hash
 
 import (
 	"fmt"
-	"mydb/index"
-	"mydb/query/table"
-	"mydb/record"
-	"mydb/tx"
-	"mydb/utils"
+	"godb/index"
+	"godb/query/table"
+	"godb/record"
+	"godb/tx"
+	"godb/utils"
 )
 
 const (

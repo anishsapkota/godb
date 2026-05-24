@@ -2,10 +2,10 @@ package table
 
 import (
 	"fmt"
-	"mydb/file"
-	"mydb/query/scan"
-	"mydb/record"
-	"mydb/tx"
+	"godb/file"
+	"godb/query/scan"
+	"godb/record"
+	"godb/tx"
 	"time"
 )
 

@@ -1,6 +1,6 @@
 package parse
 
-import "mydb/query"
+import "godb/query"
 
 type DeleteData struct {
 	tableName string

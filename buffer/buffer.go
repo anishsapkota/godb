@@ -2,8 +2,8 @@ package buffer
 
 import (
 	"fmt"
-	"mydb/file"
-	"mydb/log"
+	"godb/file"
+	"godb/log"
 )
 
 /*

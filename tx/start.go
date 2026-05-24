@@ -2,9 +2,9 @@ package tx
 
 import (
 	"fmt"
-	"mydb/file"
-	"mydb/log"
-	"mydb/utils"
+	"godb/file"
+	"godb/log"
+	"godb/utils"
 )
 
 type StartRecord struct {

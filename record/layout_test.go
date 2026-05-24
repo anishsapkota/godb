@@ -1,7 +1,7 @@
 package record
 
 import (
-	"mydb/utils"
+	"godb/utils"
 	"testing"
 
 	"github.com/stretchr/testify/assert"

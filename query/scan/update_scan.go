@@ -1,7 +1,7 @@
 package scan
 
 import (
-	"mydb/record"
+	"godb/record"
 	"time"
 )
 

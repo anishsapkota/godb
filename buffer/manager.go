@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"mydb/file"
-	"mydb/log"
+	"godb/file"
+	"godb/log"
 	"sync"
 	"time"
 )

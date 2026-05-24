@@ -1,7 +1,7 @@
 package parse
 
 import (
-	"mydb/record"
+	"godb/record"
 	"testing"
 	"time"
 

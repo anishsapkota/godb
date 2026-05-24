@@ -4,15 +4,15 @@ import (
 	"path/filepath"
 	"testing"
 
-	"mydb/plan"
-	"mydb/query/table"
-	"mydb/record"
-	"mydb/server"
+	"godb/plan"
+	"godb/query/table"
+	"godb/record"
+	"godb/server"
 )
 
 func TestTablePlan_OpenAndCount(t *testing.T) {
 	dir := filepath.Join(t.TempDir(), "db")
-	db, err := server.NewMyDB(dir)
+	db, err := server.NewGoDB(dir)
 	if err != nil {
 		t.Fatal(err)
 	}

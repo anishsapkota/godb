@@ -1,8 +1,8 @@
 package metadata
 
 import (
-	"mydb/query/table"
-	"mydb/tx"
+	"godb/query/table"
+	"godb/tx"
 	"testing"
 
 	"github.com/stretchr/testify/assert"

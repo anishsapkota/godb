@@ -1,6 +1,6 @@
 package concurrency
 
-import "mydb/file"
+import "godb/file"
 
 type Manager struct {
 	lockTable *LockTable // pointer to the global lock table

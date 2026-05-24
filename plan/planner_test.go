@@ -4,12 +4,12 @@ import (
 	"path/filepath"
 	"testing"
 
-	"mydb/server"
+	"godb/server"
 )
 
 func TestPlanner_RoundTrip(t *testing.T) {
 	dir := filepath.Join(t.TempDir(), "db")
-	db, err := server.NewMyDB(dir)
+	db, err := server.NewGoDB(dir)
 	if err != nil {
 		t.Fatal(err)
 	}

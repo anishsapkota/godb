@@ -1,6 +1,6 @@
 GO     := $(shell command -v go 2>/dev/null || echo /usr/local/go/bin/go)
-BIN    := mydb
-DATA   := ./mydb-data
+BIN    := godb
+DATA   := ./godb-data
 
 .PHONY: help build run test clean
 
@@ -10,9 +10,9 @@ help:
 	@echo ""
 	@awk '/^##/ { sub(/^## /, ""); split($$0, a, ": "); printf "  \033[36m%-12s\033[0m %s\n", a[1], a[2] }' $(MAKEFILE_LIST)
 
-## build: compile binary to ./mydb
+## build: compile binary to ./godb
 build:
-	$(GO) build -o $(BIN) ./cmd/mydb
+	$(GO) build -o $(BIN) ./cmd/godb
 
 ## run: run REPL against DATA dir (override: make run DATA=/path)
 run: build

@@ -1,6 +1,6 @@
 package parse
 
-import "mydb/query"
+import "godb/query"
 
 type ModifyData struct {
 	tableName string

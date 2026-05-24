@@ -1,12 +1,12 @@
 package hash
 
 import (
-	"mydb/buffer"
-	"mydb/file"
-	"mydb/log"
-	"mydb/record"
-	"mydb/tx"
-	"mydb/tx/concurrency"
+	"godb/buffer"
+	"godb/file"
+	"godb/log"
+	"godb/record"
+	"godb/tx"
+	"godb/tx/concurrency"
 	"os"
 	"testing"
 

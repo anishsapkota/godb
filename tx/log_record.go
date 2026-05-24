@@ -2,7 +2,7 @@ package tx
 
 import (
 	"errors"
-	"mydb/file"
+	"godb/file"
 )
 
 // LogRecordType is the type of log record.

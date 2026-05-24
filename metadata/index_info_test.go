@@ -1,13 +1,13 @@
 package metadata
 
 import (
-	"mydb/buffer"
-	"mydb/file"
-	"mydb/index"
-	"mydb/log"
-	"mydb/record"
-	"mydb/tx"
-	"mydb/tx/concurrency"
+	"godb/buffer"
+	"godb/file"
+	"godb/index"
+	"godb/log"
+	"godb/record"
+	"godb/tx"
+	"godb/tx/concurrency"
 	"os"
 	"testing"
 

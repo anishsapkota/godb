@@ -1,11 +1,11 @@
 package record
 
 import (
-	"mydb/buffer"
-	"mydb/file"
-	"mydb/log"
-	"mydb/tx"
-	"mydb/tx/concurrency"
+	"godb/buffer"
+	"godb/file"
+	"godb/log"
+	"godb/tx"
+	"godb/tx/concurrency"
 	"os"
 	"testing"
 	"time"

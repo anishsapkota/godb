@@ -1,8 +1,8 @@
 package tx
 
 import (
-	"mydb/buffer"
-	"mydb/file"
+	"godb/buffer"
+	"godb/file"
 )
 
 // pinnedBuffer tracks the underlying buffer + how many times this transaction pinned it.

@@ -2,8 +2,8 @@ package metadata
 
 import (
 	"fmt"
-	"mydb/record"
-	"mydb/tx"
+	"godb/record"
+	"godb/tx"
 )
 
 type Manager struct {

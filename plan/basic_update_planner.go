@@ -1,11 +1,11 @@
 package plan
 
 import (
-	"mydb/metadata"
-	"mydb/parse"
-	"mydb/query/scan"
-	"mydb/query/table"
-	"mydb/tx"
+	"godb/metadata"
+	"godb/parse"
+	"godb/query/scan"
+	"godb/query/table"
+	"godb/tx"
 )
 
 type UpdatePlanner interface {

@@ -1,9 +1,9 @@
 package plan
 
 import (
-	"mydb/metadata"
-	"mydb/parse"
-	"mydb/tx"
+	"godb/metadata"
+	"godb/parse"
+	"godb/tx"
 )
 
 type QueryPlanner interface {

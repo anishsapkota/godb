@@ -2,9 +2,9 @@ package metadata
 
 import (
 	"fmt"
-	"mydb/query/table"
-	"mydb/record"
-	"mydb/tx"
+	"godb/query/table"
+	"godb/record"
+	"godb/tx"
 )
 
 const (

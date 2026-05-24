@@ -2,22 +2,22 @@ package server
 
 import (
 	"fmt"
-	"mydb/buffer"
-	"mydb/file"
-	"mydb/log"
-	"mydb/metadata"
-	"mydb/plan"
-	"mydb/tx"
-	"mydb/tx/concurrency"
+	"godb/buffer"
+	"godb/file"
+	"godb/log"
+	"godb/metadata"
+	"godb/plan"
+	"godb/tx"
+	"godb/tx/concurrency"
 )
 
 const (
 	blockSize  = 4096
 	bufferSize = 8
-	logFile    = "mydb.log"
+	logFile    = "godb.log"
 )
 
-type MyDB struct {
+type GoDB struct {
 	fileManager     *file.Manager
 	bufferManager   *buffer.Manager
 	logManager      *log.Manager
@@ -26,9 +26,9 @@ type MyDB struct {
 	planner         *plan.Planner
 }
 
-// NewMyDBWithOptions is a constructor that is mostly useful for debugging purposes.
-func NewMyDBWithOptions(dirName string, blockSize, bufferSize int) (*MyDB, error) {
-	db := &MyDB{}
+// NewGoDBWithOptions is a constructor that is mostly useful for debugging purposes.
+func NewGoDBWithOptions(dirName string, blockSize, bufferSize int) (*GoDB, error) {
+	db := &GoDB{}
 	var err error
 
 	if db.fileManager, err = file.NewManager(dirName, blockSize); err != nil {
@@ -43,9 +43,9 @@ func NewMyDBWithOptions(dirName string, blockSize, bufferSize int) (*MyDB, error
 	return db, nil
 }
 
-// NewMyDB creates a new MyDB instance. Use this constructor for production code.
-func NewMyDB(dirName string) (*MyDB, error) {
-	db, err := NewMyDBWithOptions(dirName, blockSize, bufferSize)
+// NewGoDB creates a new GoDB instance.
+func NewGoDB(dirName string) (*GoDB, error) {
+	db, err := NewGoDBWithOptions(dirName, blockSize, bufferSize)
 	if err != nil {
 		return nil, err
 	}
@@ -76,26 +76,26 @@ func NewMyDB(dirName string) (*MyDB, error) {
 	return db, err
 }
 
-func (db *MyDB) NewTx() *tx.Transaction {
+func (db *GoDB) NewTx() *tx.Transaction {
 	return tx.NewTransaction(db.fileManager, db.logManager, db.bufferManager, db.lockTable)
 }
 
-func (db *MyDB) MetadataManager() *metadata.Manager {
+func (db *GoDB) MetadataManager() *metadata.Manager {
 	return db.metadataManager
 }
 
-func (db *MyDB) FileManager() *file.Manager {
+func (db *GoDB) FileManager() *file.Manager {
 	return db.fileManager
 }
 
-func (db *MyDB) LogManager() *log.Manager {
+func (db *GoDB) LogManager() *log.Manager {
 	return db.logManager
 }
 
-func (db *MyDB) BufferManager() *buffer.Manager {
+func (db *GoDB) BufferManager() *buffer.Manager {
 	return db.bufferManager
 }
 
-func (db *MyDB) Planner() *plan.Planner {
+func (db *GoDB) Planner() *plan.Planner {
 	return db.planner
 }

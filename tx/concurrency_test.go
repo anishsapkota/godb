@@ -2,12 +2,12 @@ package tx_test
 
 import (
 	"fmt"
+	"godb/buffer"
+	"godb/file"
+	"godb/log"
+	"godb/tx"
+	"godb/tx/concurrency"
 	"math/rand/v2"
-	"mydb/buffer"
-	"mydb/file"
-	"mydb/log"
-	"mydb/tx"
-	"mydb/tx/concurrency"
 	"os"
 	"strings"
 	"sync"

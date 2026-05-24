@@ -2,8 +2,8 @@ package query
 
 import (
 	"fmt"
-	"mydb/query/scan"
-	"mydb/record"
+	"godb/query/scan"
+	"godb/record"
 )
 
 type Expression struct {

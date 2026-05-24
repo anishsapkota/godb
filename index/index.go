@@ -1,6 +1,6 @@
 package index
 
-import "mydb/record"
+import "godb/record"
 
 type Index interface {
 	// BeforeFirst positions the index before the

@@ -1,13 +1,13 @@
 package metadata
 
 import (
-	"mydb/buffer"
-	"mydb/file"
-	"mydb/log"
-	"mydb/query/table"
-	"mydb/record"
-	"mydb/tx"
-	"mydb/tx/concurrency"
+	"godb/buffer"
+	"godb/file"
+	"godb/log"
+	"godb/query/table"
+	"godb/record"
+	"godb/tx"
+	"godb/tx/concurrency"
 	"testing"
 
 	"github.com/stretchr/testify/assert"

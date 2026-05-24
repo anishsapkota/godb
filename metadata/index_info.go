@@ -1,10 +1,10 @@
 package metadata
 
 import (
-	"mydb/index"
-	"mydb/index/hash"
-	"mydb/record"
-	"mydb/tx"
+	"godb/index"
+	"godb/index/hash"
+	"godb/record"
+	"godb/tx"
 )
 
 type IndexInfo struct {

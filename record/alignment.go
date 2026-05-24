@@ -1,6 +1,6 @@
 package record
 
-import "mydb/utils"
+import "godb/utils"
 
 const (
 	LongAlignment    = 8

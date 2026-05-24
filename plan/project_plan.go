@@ -1,9 +1,9 @@
 package plan
 
 import (
-	"mydb/query"
-	"mydb/query/scan"
-	"mydb/record"
+	"godb/query"
+	"godb/query/scan"
+	"godb/record"
 )
 
 type ProjectPlan struct {

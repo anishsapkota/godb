@@ -2,7 +2,7 @@ package log
 
 import (
 	"fmt"
-	"mydb/file"
+	"godb/file"
 	"sync"
 )
 

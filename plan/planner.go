@@ -2,8 +2,8 @@ package plan
 
 import (
 	"fmt"
-	"mydb/parse"
-	"mydb/tx"
+	"godb/parse"
+	"godb/tx"
 )
 
 type Planner struct {

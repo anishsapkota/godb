@@ -1,8 +1,8 @@
 package tx
 
 import (
-	"mydb/file"
-	"mydb/log"
+	"godb/file"
+	"godb/log"
 )
 
 type CheckpointRecord struct {

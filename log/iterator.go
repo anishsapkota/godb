@@ -3,7 +3,7 @@ package log
 import (
 	"errors"
 	"fmt"
-	"mydb/file"
+	"godb/file"
 )
 
 // Iterator provides the ability to move through the records of the log files in reverse order

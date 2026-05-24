@@ -1,11 +1,11 @@
 package plan
 
 import (
-	"mydb/metadata"
-	"mydb/query/scan"
-	"mydb/query/table"
-	"mydb/record"
-	"mydb/tx"
+	"godb/metadata"
+	"godb/query/scan"
+	"godb/query/table"
+	"godb/record"
+	"godb/tx"
 )
 
 type TablePlan struct {

@@ -2,11 +2,11 @@ package tx
 
 import (
 	"fmt"
+	"godb/buffer"
+	"godb/file"
+	"godb/log"
+	"godb/tx/concurrency"
 	"math"
-	"mydb/buffer"
-	"mydb/file"
-	"mydb/log"
-	"mydb/tx/concurrency"
 	"sync"
 	"time"
 )

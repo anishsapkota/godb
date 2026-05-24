@@ -1,6 +1,6 @@
 package parse
 
-import "mydb/record"
+import "godb/record"
 
 type CreateTableData struct {
 	tableName string

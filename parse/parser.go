@@ -1,8 +1,8 @@
 package parse
 
 import (
-	"mydb/query"
-	"mydb/record"
+	"godb/query"
+	"godb/record"
 )
 
 type Parser struct {

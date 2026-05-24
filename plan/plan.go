@@ -1,8 +1,8 @@
 package plan
 
 import (
-	"mydb/query/scan"
-	"mydb/record"
+	"godb/query/scan"
+	"godb/record"
 )
 
 type Plan interface {

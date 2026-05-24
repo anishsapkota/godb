@@ -2,8 +2,8 @@ package record
 
 import (
 	"fmt"
-	"mydb/file"
-	"mydb/utils"
+	"godb/file"
+	"godb/utils"
 	"sort"
 )
 

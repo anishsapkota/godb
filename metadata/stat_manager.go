@@ -1,9 +1,9 @@
 package metadata
 
 import (
-	"mydb/query/table"
-	"mydb/record"
-	"mydb/tx"
+	"godb/query/table"
+	"godb/record"
+	"godb/tx"
 	"sync"
 )
 

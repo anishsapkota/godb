@@ -1,8 +1,8 @@
 package tx
 
 import (
-	"mydb/buffer"
-	"mydb/log"
+	"godb/buffer"
+	"godb/log"
 	"time"
 )
 

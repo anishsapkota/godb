@@ -1,8 +1,8 @@
 package buffer
 
 import (
-	"mydb/file"
-	"mydb/log"
+	"godb/file"
+	"godb/log"
 	"os"
 	"path/filepath"
 	"sync"

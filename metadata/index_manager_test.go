@@ -1,10 +1,10 @@
 package metadata
 
 import (
-	"mydb/query/table"
-	"mydb/record"
+	"godb/query/table"
+	"godb/record"
 
-	"mydb/tx"
+	"godb/tx"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
