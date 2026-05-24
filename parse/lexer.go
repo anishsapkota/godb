@@ -389,7 +389,7 @@ func isOperatorStart(r rune) bool {
 func isDelimiter(r rune) bool {
 	// e.g. commas, parentheses, semicolons, plus, minus, period...
 	// We deliberately *exclude* <, >, =, ! so we can handle multi-char operators.
-	delimiters := []rune{',', '(', ')', '.', ';', '+', '-'}
+	delimiters := []rune{',', '(', ')', '.', ';', '+', '-', '*'}
 	for _, d := range delimiters {
 		if r == d {
 			return true

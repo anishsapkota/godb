@@ -29,15 +29,16 @@ func (qd *QueryData) Pred() *query.Predicate {
 }
 
 func (qd *QueryData) String() string {
-	if len(qd.fields) == 0 || len(qd.tables) == 0 {
+	if len(qd.tables) == 0 {
 		return ""
 	}
 	result := "select "
-	for _, fieldName := range qd.fields {
-		result += fieldName + ", "
-	}
-	// remove final comma/space
-	if len(qd.fields) > 0 {
+	if qd.fields == nil {
+		result += "*"
+	} else {
+		for _, fieldName := range qd.fields {
+			result += fieldName + ", "
+		}
 		result = result[:len(result)-2]
 	}
 	result += " from "

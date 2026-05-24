@@ -168,6 +168,10 @@ func (p *Parser) Query() (*QueryData, error) {
 }
 
 func (p *Parser) selectList() ([]string, error) {
+	if p.lex.MatchDelim('*') {
+		_ = p.lex.EatDelim('*')
+		return nil, nil // nil = SELECT *
+	}
 	f, err := p.field()
 	if err != nil {
 		return nil, err

@@ -47,5 +47,9 @@ func (qp *BasicQueryPlanner) CreatePlan(data *parse.QueryData, tx *tx.Transactio
 		p = NewProductPlan(p, next)
 	}
 	p = NewSelectPlan(p, data.Pred())
-	return NewProjectPlan(p, data.Fields()), nil
+	fields := data.Fields()
+	if fields == nil {
+		fields = p.Schema().Fields()
+	}
+	return NewProjectPlan(p, fields), nil
 }
